@@ -1,0 +1,44 @@
+﻿@model Course
+@{
+    Layout = null;
+}
+<h3>Please enter the data for new course:</h3>
+<table id="formTbl">
+    <tr>
+        <td class="cellOne"><label asp-for="CourseCode">Course Code:</label></td>
+        <td class="cellTwo"><input type="text" asp-for="CourseCode" /></td>
+    </tr>
+    <tr>
+        <td class="cellOne"><label asp-for="CourseName">Course Name:</label></td>
+        <td class="cellTwo"><input type="text" asp-for="CourseName" /></td>
+    </tr>
+    <tr>
+        <td class="cellOne"><label asp-for="Semester">Semester: </label></td>
+        <td>
+            <ul id="semList">
+                <li>@Html.RadioButton("Semester", "Winter") Winter</li>
+                <li>@Html.RadioButton("Semester", "Summer") Summer</li>
+                <li>@Html.RadioButton("Semester", "Fall") Fall</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td class="cellOne"><label asp-for="NoOfCredit">Number of Credit: </label></td>
+        <td class="cellTwo"><input asp-for="NoOfCredit" placeholder="Enter a valid number 1-6" /></td>
+    </tr>
+    <tr>
+        <td class="cellOne"><label asp-for="CourseFee">Course Fee: </label></td>
+        <td class="cellTwo"><input asp-for="CourseFee" placeholder="$150.00-$450.50" /></td>
+    </tr>
+    <tr>
+        <td class="cellOne"> <label asp-for="FacultyName">Faculty Name: </label></td>
+        <td class="cellTwo"><input asp-for="FacultyName" placeholder="Jake Nasovic" /></td>
+  
+    </tr>
+    <tr>
+        <td class="cellOne"><label asp-for="CourseDesc">Course Description: </label></td>
+        <td class="cellTwo"><textarea asp-for="CourseDesc" placeholder="Describe the course in brief.."></textarea></td>
+    </tr>
+</table>
+
+

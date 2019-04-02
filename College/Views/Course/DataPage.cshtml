@@ -1,0 +1,108 @@
+﻿@model Course
+
+@{
+    Layout = "_Layout";
+}
+@{
+    ViewBag.Title = "Data Page";
+}
+
+@if (User.IsInRole("Admin"))
+{
+
+    <form asp-controller="Course" asp-action="Updated" method="post">
+        <div asp-validation-summary="All"></div>
+        <input asp-for="CourseId" type="hidden" />
+        <h3>Update the data for the course:</h3>
+        <table id="dataTbl">
+            <tr>
+                <td class="cellOne"><label asp-for="CourseCode">Course Code:</label></td>
+                <td class="cellTwo"><input type="text" asp-for="CourseCode" /></td>
+            </tr>
+            <tr>
+                <td class="cellOne"><label asp-for="CourseName">Course Name:</label></td>
+                <td class="cellTwo"><input type="text" asp-for="CourseName" /></td>
+            </tr>
+            <tr>
+                <td class="cellOne"><label asp-for="Semester">Semester:</label></td>
+                <td class="cellTwo"><input type="text" asp-for="Semester" /></td>
+            </tr>
+            <tr>
+                <td class="cellOne"><label asp-for="CourseFee">Course Fee:</label></td>
+                <td class="cellTwo"><input type="text" asp-for="CourseFee" /></td>
+            </tr>
+            <tr>
+                <td class="cellOne"><label asp-for="FacultyName">Faculty Name:</label></td>
+                <td class="cellTwo"><input type="text" asp-for="FacultyName" /></td>
+            </tr>
+            <tr>
+                <td class="cellOne"><label asp-for="NoOfCredit">Credit:</label></td>
+                <td class="cellTwo"><input type="text" asp-for="NoOfCredit" /></td>
+            </tr>
+            <tr>
+                <td class="cellOne"><label asp-for="CourseDesc">Course Description:</label></td>
+                <td class="cellTwo"><textarea asp-for="CourseDesc"></textarea></td>
+            </tr>
+            
+
+        </table>
+        <hr>
+        <button type="submit">Update</button>
+        <button asp-controller="Course" asp-action="DisplayPage">Back to list</button>&nbsp;&nbsp;
+
+    </form>
+
+    <br />
+    <form asp-controller="Course" asp-action="Deleted" method="post">
+        <input type="hidden" asp-for="CourseCode" />
+        <input type="hidden" asp-for="CourseId" />
+        <input type="hidden" asp-for="CourseName" />
+        <input type="hidden" asp-for="Semester" />
+        <input type="hidden" asp-for="CourseFee" />
+        <input type="hidden" asp-for="NoOfCredit" />
+        <input type="hidden" asp-for="FacultyName" />
+        <input type="hidden" asp-for="CourseDesc" />
+        <button style="background-color:indianred;" type="submit">Delete </button>
+    </form>
+}
+
+else
+{
+
+    <h3>Course Details:</h3>
+    <table>
+        <tr>
+            <td><label asp-for="CourseCode">Course Code:</label></td>
+            <td><label asp-for="CourseCode">@Model.CourseCode</label></td>
+        </tr>
+        <tr>
+            <td><label asp-for="CourseName">Course Name:</label></td>
+            <td style="width:200px;"><label asp-for="CourseName">@Model.CourseName</label></td>
+        </tr>
+        <tr>
+            <td style="width:200px;"><label asp-for="Semester">Semester:</label></td>
+            <td><label asp-for="Semester">@Model.Semester</label></td>
+        </tr>
+        <tr>
+            <td><label asp-for="CourseFee">Course Fee:</label></td>
+            <td><label asp-for="CourseFee">@Model.CourseFee</label></td>
+        </tr>
+        <tr>
+            <td><label asp-for="FacultyName">Faculty Name:</label></td>
+            <td style="width:200px;"><label asp-for="FacultyName">@Model.FacultyName</label></td>
+        </tr>
+        <tr>
+            <td><label asp-for="NoOfCredit">Credit:</label></td>
+            <td><label asp-for="NoOfCredit">@Model.NoOfCredit</label></td>
+        </tr>
+        <tr>
+            <td style="width:200px;"><label asp-for="CourseDesc">Course Description:</label></td>
+            <td style="width:300px;"><label asp-for="CourseDesc">@Model.CourseDesc</label></td>
+        </tr>
+    </table>
+    <br>
+    <a asp-action="AddCourse" asp-controller="Cart" asp-route-courseId="@Model.CourseId" 
+        asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()/@Model.CourseId" id="slist">Enroll to this Course</a>
+    <a id="slist" asp-controller="Course" asp-action="DisplayPage">Back to list</a>
+
+}

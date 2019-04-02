@@ -1,0 +1,69 @@
+﻿@model CartViewModel
+
+<h2>List of Courses in Cart</h2>
+
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th style="width:200px; text-align:left;">Course Name</th>
+            <th style=" text-align:left;">Course Code</th>
+            <th style=" text-align:left;">Course Fee</th>
+        </tr>
+        <tr>
+            <th style="width:200px; text-align:left;">____________</th>
+            <th style=" text-align:left;">____________</th>
+            <th style=" text-align:left;">____________</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cartLine in Model.Cart.CartLines)
+        {
+            <tr>
+                <td>@cartLine.Course.CourseName</td>
+                <td>@cartLine.Course.CourseCode</td>
+                <td>@cartLine.Course.CourseFee</td>
+                <td>
+                    <form asp-action="RemoveFromCart" method="post">
+                        <input type="hidden" name="CourseId"
+                               value="@cartLine.Course.CourseId" />
+                        <input type="hidden" name="returnUrl"
+                               value="@Model.ReturnUrl" />
+                        <button type="submit">
+                            Remove
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>_______________</td>
+            <td>_______________</td>
+        </tr>
+        <tr>
+            <td colspan="2">Total:</td>
+            <td>
+                @Model.Cart.ComputeTotalValue().ToString("C")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<br />
+<div id="btnDiv2">
+    @if (Model.ReturnUrl == null)
+    {
+        <a href="/" id="slist">Home</a>
+    }
+    else
+    {
+        <a href="@Model.ReturnUrl" id="slist">Continue ...</a>
+    }
+    @if (Model.Cart.CartLines.Count() != 0)
+    {
+        <a asp-controller="Cart" asp-action="CheckoutAsync" id="slist">CheckOut</a>
+    }
+
+</div>

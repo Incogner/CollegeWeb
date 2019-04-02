@@ -1,0 +1,15 @@
+﻿@model Student
+
+@if (Model.Pic == null || Model.Pic == "")
+{
+    <h4>Upload a picture to your profile:</h4>
+}
+else
+{
+    <h4>Upload the new Picture</h4>
+}
+    <form asp-controller="Student" asp-action="UploadFile" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*">
+        <Button type="submit">Upload</Button>
+        <a asp-controller="Student" asp-action="Profile" asp-route-userName="@Model.UserName" id="slist">Back to Profile</a>
+    </form>

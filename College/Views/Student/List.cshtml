@@ -1,0 +1,35 @@
+﻿@model StudentListViewModel
+
+@{
+    Layout = "_Layout";
+}
+@{
+    ViewBag.Title = "Student List";
+}<div id="list">
+
+    <h3>The list of students:</h3>
+    <table>
+        <tr>
+            <th style="width:110px;">
+                First Name
+            </th>
+            <th id="longer">
+                Last Name
+            </th>
+            <th id="long">
+                Address
+            </th>
+        </tr>
+    </table>
+    <hr />
+
+    @foreach (var s in Model.Students)
+    {
+        @Html.Partial("_StudentLink", s)
+        <p style="height:5px; padding:0; margin:0;"></p>
+    }
+
+    <div class="paging" page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true">
+    </div>
+</div>
+<hr />

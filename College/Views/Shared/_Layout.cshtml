@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using College.Models
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link type="text/css" rel="stylesheet" href="~/css/Style.css" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div id="container">
+        <header>
+            @if (SignInManager.IsSignedIn(User))
+            {
+            <div id="bar">
+                <p>Hello @UserManager.GetUserName(User)!</p>
+                <a asp-controller="Student" asp-action="Profile" asp-route-userName="@UserManager.GetUserName(User)" id="barprofile">Profile</a>
+                <a asp-Controller="Account" asp-action="Logout" id="barlogout">Logout</a>
+                @if (User.IsInRole("Student"))
+                {
+                    <a asp-Controller="Cart" asp-action="Index" id="barcart">Cart</a>
+                }
+
+            </div>
+            }
+            <div id="title">
+                <h1>MTVC College</h1>
+                <img src="~/images/MTVC-Logo.png" />
+            </div>
+            <div id="menu-div">
+                <ul id="menu">
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Course" asp-action="DisplayPage">Course List</a></li>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a asp-controller="Course" asp-action="InsertPage">Add Course</a></li>
+                            <li><a asp-Controller="Student" asp-action="List">Students</a></li>
+                        }
+                        else if (User.IsInRole("Student"))
+                        {
+                            <li><a asp-Controller="Course" asp-action="MyCourse" asp-route-userName="@UserManager.GetUserName(User)">MyCourse</a></li>
+                        }
+                    }
+                    else
+                    {
+                        <li><a asp-Controller="Account" asp-action="Login">Login</a></li>
+                        <li><a asp-Controller="Account" asp-action="Register">Register</a></li>
+                    }
+
+                </ul>
+            </div>
+        </header>
+        <div id="content">
+            <div>
+                @RenderBody()
+            </div>
+        </div>
+        <footer id="footer">
+            <h6>&copy;&nbsp;Copyright Mahdi Moradi - ASP.NET Core Web Application - Fall 2018</h6>
+        </footer>
+    </div>
+</body>
+</html>

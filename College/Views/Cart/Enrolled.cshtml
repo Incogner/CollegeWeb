@@ -1,0 +1,12 @@
+﻿@model CartViewModel
+
+<h2>You Already Enrolled to this course!</h2>
+
+@if (Model.ReturnUrl == null)
+{
+    <a href="/" id="slist">Home</a>
+}
+else
+{
+    <a href="@Model.ReturnUrl" id="slist">Continue ...</a>
+}

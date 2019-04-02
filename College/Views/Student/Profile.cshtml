@@ -1,0 +1,67 @@
+﻿@model Student
+@{
+    Layout = "_Layout";
+}
+
+@{
+    ViewBag.Title = "Profile";
+}
+@if (Model.Pic == null || Model.Pic == "")
+{
+    <h4>You can upload a picture to your profile:</h4>
+    <a asp-controller="Student" asp-action="Picture" asp-route-id="@Model.StudentId" id="slist">Upload Photo</a>
+}
+else
+{
+    <br>
+    <img src="~/images/profile/@Model.Pic" width="150" style="border: solid 1px black;" />
+    <h4>To change your photo, Upload a new one:</h4>
+    <a asp-controller="Student" asp-action="Picture" asp-route-id="@Model.StudentId" id="slist">Upload Photo</a>
+}
+
+<br>
+<form asp-controller="Student" asp-action="UpdateProfile" method="post">
+    <div asp-validation-summary="All" id="alert"></div>
+    <h3>Enter data for new student and add to the course</h3>
+    <input asp-for="Enrollments" type="hidden" />
+    <input asp-for="Pic" type="hidden" />
+    <input asp-for="StudentId" type="hidden" />
+    <input asp-for="UserName" type="hidden" />
+    <table>
+        <tr>
+            <td><label asp-for="StudentId">StudentID:</label></td>
+            <td><input asp-for="StudentId" type="text" disabled="disabled" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="UserName">User Name:</label></td>
+            <td><input asp-for="UserName" type="text" disabled="disabled" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="FName">First Name:</label></td>
+            <td><input asp-for="FName" type="text" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="LName">Last Name:</label></td>
+            <td><input asp-for="LName" type="text" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Address">Address:</label></td>
+            <td><input asp-for="Address" type="text" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="City">City:</label></td>
+            <td><input asp-for="City" type="text" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Province">Province:</label></td>
+            <td><input asp-for="Province" type="text" /></td>
+        </tr>
+    </table>
+    <br />
+    <button type="submit">Update</button>
+    @if (User.IsInRole("Student"))
+    {
+    <button asp-controller="Course" asp-action="MyCourse">To My Course List</button>
+    }
+    
+</form>

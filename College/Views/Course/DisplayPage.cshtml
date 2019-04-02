@@ -1,0 +1,60 @@
+﻿@model CourseListViewModel
+
+@{
+    Layout = "_Layout";
+}
+@{
+    ViewBag.Title = "Display Page";
+}<div id="list">
+    <br />
+    @* ********** SEARCH FEATURE 1 ********** *@
+    <form asp-action="DisplayPage" asp-route-searchstring="@Model.SearchString" asp-route-searchfield="@Model.SearchField">
+        <input type="text" name="searchstring" asp-for="@Model.SearchString" />
+        <select name="searchfield" asp-for="@Model.SearchField">
+            <option value="allfields">All Fields</option>
+            <option value="coursecode">Course Code</option>
+            <option value="coursename">Course Name</option>
+            <option value="coursedescription">Course Description</option>
+        </select>
+        <button type="submit">SEARCH</button>
+    </form>
+    @* ********** SEARCH FEATURE 1 ********** *@
+
+    <h3>The list of courses:</h3>
+    <table>
+        <tr>
+            <th style="width:110px;">
+                Course Code
+            </th>
+            <th id="longer">
+                Course Name
+            </th>
+            <th id="long">
+                Semester
+            </th>
+        </tr>
+    </table>
+    <hr />
+
+    @foreach (var c in Model.Courses)
+    {
+        @Html.Partial("_CourseLink", c)
+        <p style="height:5px; padding:0; margin:0;"></p>
+    }
+
+    <div class="paging" page-model="@Model.PagingInfo" page-action="DisplayPage" page-classes-enabled="true">
+    </div>
+</div>
+@if (User.IsInRole("Admin"))
+{
+    <hr />
+    <hr />
+    <form>
+        <button asp-controller="Course" asp-action="InsertPage">Add Course</button>
+        <a asp-controller="Course" asp-action="PDF" id="slist">Save All Courses as PDF</a>
+    </form>
+}
+else
+{
+    <a asp-controller="Course" asp-action="PDF" id="slist">Save All Courses as PDF</a>
+}

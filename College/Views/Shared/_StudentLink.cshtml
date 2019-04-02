@@ -1,0 +1,29 @@
+﻿@model Student
+@{
+    Layout = null;
+}
+
+
+<form asp-controller="Student" asp-action="ShowStudent" method="post">
+    <input type="hidden" asp-for="StudentId" />
+    <input type="hidden" asp-for="Province" />
+    <input type="hidden" asp-for="Enrollments" />
+    <input type="hidden" asp-for="City" />
+    <input type="hidden" asp-for="Pic" />
+    <input type="hidden" asp-for="FName" />
+    <input type="hidden" asp-for="LName" />
+    <input type="hidden" asp-for="Address" />
+
+    <button type="submit">
+        <table id="list">
+            <tbody>
+                <tr>
+                    <td id="medium">@Model.FName</td>
+                    <td id="longer">| @Model.LName</td>
+                    <td id="long">| @Model.Address</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </button>
+</form>
