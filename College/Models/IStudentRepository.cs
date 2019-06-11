@@ -11,7 +11,7 @@ namespace College.Models
         IQueryable<Student> Students { get; }
 
         void SaveStudent(Student student);
-        void SavePic(Student student, string pic);
+        void SavePic(Student student, Uri pic);
         void DeleteStudent(Student student);
 
     }

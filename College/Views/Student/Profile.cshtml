@@ -14,7 +14,14 @@
 else
 {
     <br>
-    <img src="~/images/profile/@Model.Pic" width="150" style="border: solid 1px black;" />
+    try
+    {
+        <img src="@Model.Pic" width="150" style="border: solid 1px black;" />
+    }
+    catch (Exception e)
+    {
+        <p>Error: Can Not Load the Picture</p>
+    }
     <h4>To change your photo, Upload a new one:</h4>
     <a asp-controller="Student" asp-action="Picture" asp-route-id="@Model.StudentId" id="slist">Upload Photo</a>
 }
@@ -61,7 +68,7 @@ else
     <button type="submit">Update</button>
     @if (User.IsInRole("Student"))
     {
-    <button asp-controller="Course" asp-action="MyCourse">To My Course List</button>
+        <button asp-controller="Course" asp-action="MyCourse">To My Course List</button>
     }
-    
+
 </form>

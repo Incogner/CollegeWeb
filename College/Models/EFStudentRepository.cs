@@ -40,7 +40,7 @@ namespace College.Models
             }
             context.SaveChanges();
         }
-        public void SavePic(Student student, string pic)
+        public void SavePic(Student student, Uri pic)
         {
             if (student != null)
             {
@@ -48,7 +48,7 @@ namespace College.Models
                     .FirstOrDefault(s => s.StudentId == student.StudentId);
                 if (dbEntry != null)
                 {
-                    dbEntry.Pic = pic;
+                    dbEntry.Pic = pic.ToString();
                 }
             }
             context.SaveChanges();

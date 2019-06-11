@@ -24,6 +24,5 @@ namespace College.Models
         public string Province { get; set; }
         public List<Enrollment> Enrollments { get; set; }
         public string Pic { get; set; }
-
     }
 }
